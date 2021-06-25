@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+    <!-- bolt引用 -->
+<!--    <sofa:reference id="boltHelloSyncServiceReference" interface="cn.hagsyn.service.HelloHagsynService">-->
+<!--        <sofa:binding.bolt/>-->
+<!--    </sofa:reference>-->
+
+    <!-- rest引用 -->
+<!--    <sofa:reference id="restHelloSyncServiceReference" interface="cn.hagsyn.service.HelloHagsynService">-->
+<!--        <sofa:binding.rest/>-->
+<!--    </sofa:reference>-->
+
+    <!-- dubbo引用 -->
+    <sofa:reference id="dubboHelloSyncServiceReference" interface="cn.hagsyn.service.HelloHagsynService">
+        <sofa:binding.dubbo/>
+    </sofa:reference>
+
+
+    <!-- JVM引用 -->
+        <sofa:reference id="jvmHelloSyncServiceReference" interface="cn.hagsyn.service.HelloHagsynService">
+            <sofa:binding.jvm/>
+        </sofa:reference>
+</beans>
