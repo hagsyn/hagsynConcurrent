@@ -50,7 +50,7 @@ public class Solution506 {
         //将数组转换为集合
         List scoreList = Arrays.stream(score).boxed().collect(Collectors.toList());
 //        List scoreList = new ArrayList();
-        Collections.addAll(scoreList,score);
+        Collections.addAll(scoreList, score);
         scoreList.sort(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -77,6 +77,48 @@ public class Solution506 {
             retScore[i] = sortStr;
         }
         return retScore;
+    }
+
+    public static String[] findRelativeRanks3(int[] score) {
+        String[] strs = new String[score.length];
+
+        int maxNum = score[0];
+        // 找到 nums 数组中的最大值
+        for (int i : score) {
+            maxNum = Math.max(maxNum, i);
+        }
+        // 创建哈希映射数组
+        int[] bucket = new int[maxNum + 1];
+        // 遍历 nums 数组，bucket 索引为 nums 元素，索引上的值为是否出现的标志
+        for (int i : score) {
+            bucket[i] = 1;
+        }
+        // 变量 j 定义名次
+        int j = 1;
+        // 在 bucket 数组中对出现的元素进行排序，从 1 开始
+        for (int i = bucket.length - 1; i >= 0; i--) {
+            if (bucket[i] > 0) {
+                bucket[i] = j++;
+            }
+        }
+        // 遍历 nums 数组，根据元素值在 bucket 数组中取值，数值即为名次
+        for (int i = 0; i < score.length; i++) {
+            int k = bucket[score[i]];
+            if (k > 3) {
+                // 前 3 名之后的直接赋值名次
+                strs[i] = Integer.toString(k);
+            } else {
+                // 前 3 名需要单独赋值特殊字符串
+                if (k == 1) {
+                    strs[i] = "Gold Medal";
+                } else if (k == 2) {
+                    strs[i] = "Silver Medal";
+                } else {
+                    strs[i] = "Bronze Medal";
+                }
+            }
+        }
+        return strs;
     }
 
     public static void main(String[] args) {
